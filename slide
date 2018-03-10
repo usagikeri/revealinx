@@ -1,0 +1,41 @@
+#!/bin/sh
+
+help(){
+        echo "Usage: slide [option] markdown-file"
+        echo "copy markdown-file to ~/.slide/"
+        echo
+        echo "Option:"
+        echo "    -o open localhost:8080(slide page)"
+        echo "    -h show help"
+        echo "    -p open pdf page"
+        echo
+        echo "e.g.:"
+        echo "   $slide -o markdown-file"
+        echo "   copy and open"
+        echo "    $slide -o"
+        echo "   open slide page"
+        echo "   $slide -p"
+        echo "   open pdf page"
+}
+
+getopts "hop" opts
+
+if [ $opts = "o" ]; then
+    if [ $2 ] ; then
+        cp $2 $HOME/.slide/slide.md
+        open http://localhost:8080
+    else 
+        open http://localhost:8080
+    fi
+elif [ $opts = "h" ]; then
+       help 
+elif [ $opts = "p" ]; then
+        open 'http://localhost:8080/?print-pdf'
+else
+    if [ $1 ] ; then
+        cp $1 $HOME/.slide/slide.md
+    else
+        help
+
+    fi
+fi
