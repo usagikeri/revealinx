@@ -21,13 +21,18 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-        --!>j
+        -->
         <link rel="stylesheet" href="css/print/pdf.css" type="text/css">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-                    <section data-markdown="slide/slide.md" data-separator="^\n---\n$" data-separator-vertical="^\n>>>\n$"></section>
+                    <section data-markdown="./slide/slide.md"
+                            data-separator="^\n---\n$"
+                            data-separator-vertical="^\n>>>\n$"
+                            data-separator-notes="^Note:"
+                            data-charset="utf-8">
+                    </section>
 			</div>
 		</div>
 
