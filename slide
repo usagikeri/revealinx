@@ -11,11 +11,11 @@ help(){
         echo
         echo "e.g.:"
         echo "   $slide -o markdown-file"
-        echo "   copy and open"
+        echo "      copy and open"
         echo "    $slide -o"
-        echo "   open slide page"
+        echo "      open slide page"
         echo "   $slide -p"
-        echo "   open pdf page"
+        echo "      open pdf page"
 }
 
 getopts "hop" opts
