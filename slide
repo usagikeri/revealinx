@@ -2,7 +2,7 @@
 
 help(){
         echo "Usage: slide [option] markdown-file"
-        echo "copy markdown-file to ~/.slide/"
+        echo "copy markdown-file to ~/.revealinx/slide/"
         echo
         echo "Option:"
         echo "    -o open localhost:8080(slide page)"
@@ -18,24 +18,35 @@ help(){
         echo "      open pdf page"
 }
 
+d_run(){
+    docker rm $(docker ps -a -q)
+    if ! docker ps | grep 'revealinx' >/dev/null ; then
+             docker run --name revealinx -d -p 8080:80 -v $HOME/.revealinx/:/usr/share/nginx/reveal.js/ usagikeri/revealinx
+    fi
+}
+
 getopts "hop" opts
 
 if [ $opts = "o" ]; then
     if [ $2 ] ; then
-        cp $2 $HOME/.slide/slide.md
+        cp $2 $HOME/.revealinx/slide/slide.md
+        d_run
         open http://localhost:8080
     else 
+        d_run
         open http://localhost:8080
     fi
 elif [ $opts = "h" ]; then
        help 
 elif [ $opts = "p" ]; then
+        d_run
         open 'http://localhost:8080/?print-pdf'
 else
     if [ $1 ] ; then
-        cp $1 $HOME/.slide/slide.md
+        cp $1 $HOME/.revealinx/slide/slide.md
     else
         help
 
     fi
 fi
+
