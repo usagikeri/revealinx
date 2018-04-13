@@ -5,8 +5,8 @@ fi
 git clone https://github.com/hakimel/reveal.js
 
 cp src/index.html reveal.js/
-mkdir -p ~/.revealinx/slide
 mv reveal.js ~/.revealinx
+mkdir -p ~/.revealinx/slide
 
 cat README.md > ~/.revealinx/slide/slide.md
 
