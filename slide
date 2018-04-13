@@ -19,7 +19,7 @@ help(){
 }
 
 d_run(){
-    docker rm $(docker ps -a -q)
+    docker rm $(docker ps -a -q) 2>/dev/null
     if ! docker ps | grep 'revealinx' >/dev/null ; then
              docker run --name revealinx -d -p 8080:80 -v $HOME/.revealinx/:/usr/share/nginx/reveal.js/ usagikeri/revealinx
     fi
