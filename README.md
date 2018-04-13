@@ -20,12 +20,17 @@ Doccker(nginx) + reveal.js(https://github.com/hakimel/reveal.js/)
 
 # Install 
 
-1. $git clone 
-2. $sh install.sh
+1. `$git clone `
+2. `$sh install.sh`
 
 ---
 
 # Using
+
+move all files ~/.slide
+change markdown'filename to slide.md
+
+
 1. create markdown file 
 2. `$cp slide.md ~/.slide/slide.md`
 3. `$cp markdown-file ~/.slide/slide.md` 
@@ -34,13 +39,13 @@ Doccker(nginx) + reveal.js(https://github.com/hakimel/reveal.js/)
 
 or
 
-1. chmod a+x slide
-2. cp slide /usr/local/bin/
-3. slide
+1. `chmod a+x slide`
+2. `cp slide /usr/local/bin/`
+3. `slide`
 
 ---
 
-# slide command
+## slide command
 e.g.
 1. slide markdown-file
 copy markdown file
