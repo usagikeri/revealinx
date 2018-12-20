@@ -8,6 +8,7 @@ help(){
         echo "    -o open localhost:8080(slide page)"
         echo "    -h show help"
         echo "    -p open pdf page"
+        echo "    -t change slide theme"
         echo
         echo "e.g.:"
         echo "   $slide -o markdown-file"
@@ -25,22 +26,66 @@ d_run(){
     fi
 }
 
-getopts "hop" opts
+change_t() {
+    choice=0
+    raw=""
+    menu=(Black White League Sky Beige Simple Serif Blood Night Moon Solarized)
+    tail=`expr ${#menu[@]} - 1`
+    printf "\e[32mChoose one\e[m\n"  >&2
+    for _ in $(seq 0 $tail);do echo "";done
+
+    while true
+    do
+        printf "\e[${#menu[@]}A\e[m" >&2
+
+        for i in $(seq 0 $tail);do
+            if [ $choice = $i ]
+            then
+                printf "\e[1;31m>\e[m \e[1;4m" >&2
+            else
+                printf "  " >&2
+            fi
+            printf "${menu[$i]}\e[m\n" >&2
+        done
+
+        read -sn1 answer
+        if [ "$answer" = "^[" ]; then
+            read -sn2 answer
+        fi
+        case $answer in
+            "j"|"[B")
+                if [ $choice -lt $tail ]; then choice=`expr $choice + 1`; fi
+                ;;
+            "k"|"[A")
+                if [ $choice -gt 0 ]; then choice=`expr $choice - 1`; fi
+                ;;
+            "")
+                raw=${menu[$choice]}
+                sed -i -e "s/\(.*css\/theme\/\)\(.*\)\(\.css\)/\1$raw\3/" ~/.revealinx/index.html
+                return 0
+                ;;
+        esac
+    done
+}
+
+getopts "hotp" opts
 
 if [ $opts = "o" ]; then
     if [ $2 ] ; then
         cp $2 $HOME/.revealinx/slide/slide.md
         d_run
         open http://localhost:8080
-    else 
+    else
         d_run
         open http://localhost:8080
     fi
 elif [ $opts = "h" ]; then
-       help 
+       help
 elif [ $opts = "p" ]; then
         d_run
         open 'http://localhost:8080/?print-pdf'
+elif [ $opts = "t" ]; then
+        change_t
 else
     if [ $1 ] ; then
         cp $1 $HOME/.revealinx/slide/slide.md
