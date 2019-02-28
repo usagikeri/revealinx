@@ -73,6 +73,7 @@ getopts "hotp" opts
 if [ $opts = "o" ]; then
     if [ $2 ] ; then
         cp $2 $HOME/.revealinx/slide/slide.md
+        #ln -sf $PWD/$2 $HOME/.revealinx/slide/slide.md
         d_run
         open http://localhost:8080
     else
@@ -89,6 +90,7 @@ elif [ $opts = "t" ]; then
 else
     if [ $1 ] ; then
         cp $1 $HOME/.revealinx/slide/slide.md
+        #ln -sf $PWD/$1 $HOME/.revealinx/slide/slide.md
     else
         d_run
         open http://localhost:8080
